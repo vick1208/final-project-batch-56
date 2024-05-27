@@ -3,18 +3,12 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
+	"project-indekost/database"
 	"project-indekost/routes"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-)
-
-const (
-	host     = "localhost"
-	port     = "5432"
-	user     = "postgres"
-	password = "admin"
-	dbname   = "db_boarding"
 )
 
 var (
@@ -31,7 +25,7 @@ func main() {
 	fmt.Println("success to load file env")
 
 	postgresInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 
 	Database, err = sql.Open("postgres", postgresInfo)
 	if err != nil {
@@ -45,8 +39,9 @@ func main() {
 	}
 	fmt.Println("Successfully connected to database")
 
+	database.DatabaseMigrate(Database)
 	//local
-	PORT := ":8000"
+	PORT := ":8080"
 	server := routes.MainServer()
 	server.Run(PORT)
 }

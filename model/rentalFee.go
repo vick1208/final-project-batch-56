@@ -2,8 +2,7 @@ package model
 
 type RentalFee struct {
 	ID            int    `json:"id"`
-	LodgerID      int    `json:"lodger_id"`
-	RoomID        int    `json:"room_id"`
+	ReservationID int    `json:"reservation_id"`
 	Bank          string `json:"bank"`
 	PaymentType   string `json:"payment_type"`
 	AdditionalFee string `json:"additional_fee"`
