@@ -6,4 +6,5 @@ type Lodger struct {
 	LastName  string `json:"last_name"`
 	City      string `json:"city"`
 	Phone     string `json:"phone"`
+	RoomID    int    `json:"room_id"`
 }
