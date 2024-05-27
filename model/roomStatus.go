@@ -1,6 +1,6 @@
 package model
 
-type Status struct {
+type RoomStatus struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
