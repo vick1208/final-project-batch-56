@@ -12,7 +12,7 @@ const (
 	port     = 5432
 	user     = "postgres"
 	password = "admin"
-	dbname   = "db_boarding_house"
+	dbname   = "db_boarding"
 )
 
 var (
@@ -34,4 +34,5 @@ func main() {
 		fmt.Println("Failed connected to database")
 		panic(err)
 	}
+	fmt.Println("Successfully connected to database")
 }
