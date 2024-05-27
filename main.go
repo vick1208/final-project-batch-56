@@ -4,12 +4,13 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 const (
 	host     = "localhost"
-	port     = 5432
+	port     = "5432"
 	user     = "postgres"
 	password = "admin"
 	dbname   = "db_boarding"
@@ -21,7 +22,14 @@ var (
 )
 
 func main() {
-	postgresInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+
+	err = godotenv.Load("config/.env.local")
+	if err != nil {
+		fmt.Println("failed to load file env: ", err)
+	}
+	fmt.Println("success to load file env")
+
+	postgresInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
 	Database, err = sql.Open("postgres", postgresInfo)
