@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"project-indekost/routes"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -43,4 +44,9 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("Successfully connected to database")
+
+	//local
+	PORT := ":8000"
+	server := routes.MainServer()
+	server.Run(PORT)
 }
