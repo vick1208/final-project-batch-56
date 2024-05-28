@@ -15,7 +15,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 	defer rows.Close()
 	for rows.Next() {
 		lodger := structs.Lodger{}
-		err = rows.Scan(&lodger.ID, &lodger.FirstName)
+		err = rows.Scan(&lodger.ID, &lodger.FirstName, &lodger.City, &lodger.Phone)
 		if err != nil {
 			panic(err)
 		}
@@ -29,8 +29,4 @@ func InsertLodger(db *sql.DB, lodger structs.Lodger) error {
 	query := "INSERT INTO category(first_name,city,phone) VALUES($1,$2,$3)"
 	errs := db.QueryRow(query, lodger.FirstName, lodger.City, lodger.Phone)
 	return errs.Err()
-}
-
-func UpdateLodger(db *sql.DB) {
-
 }

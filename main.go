@@ -17,9 +17,7 @@ var (
 )
 
 func main() {
-
 	err = godotenv.Load("config/.env")
-
 	if err != nil {
 		fmt.Println("failed to load file env")
 	}
@@ -27,14 +25,15 @@ func main() {
 
 	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
-
 	DB, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
 
 	defer DB.Close()
+
 	err = DB.Ping()
+
 	if err != nil {
 		fmt.Println("Failed connected to database")
 		panic(err)
@@ -44,7 +43,6 @@ func main() {
 	database.DatabaseMigrate(DB)
 
 	PORT := ":8080"
-
 	server := routes.MainServer()
 	server.Run(PORT)
 }
