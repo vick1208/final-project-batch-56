@@ -10,7 +10,7 @@ import (
 
 func GetAllLodgers(c *gin.Context) {
 	var result gin.H
-	lodgers, err := repositories.GetLodgers(database.DBConnection)
+	lodgers, err := repositories.GetAllLodgers(database.DBConnection)
 	if err != nil {
 		result = gin.H{
 			"result": err,

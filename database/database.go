@@ -5,7 +5,7 @@ import (
 	"embed"
 	"fmt"
 
-	migrateSql "github.com/rubenv/sql-migrate"
+	migrate "github.com/rubenv/sql-migrate"
 )
 
 var DBConnection *sql.DB
@@ -14,12 +14,12 @@ var DBConnection *sql.DB
 var dataMigrate embed.FS
 
 func DatabaseMigrate(paramDB *sql.DB) {
-	migrations := &migrateSql.EmbedFileSystemMigrationSource{
+	migrations := &migrate.EmbedFileSystemMigrationSource{
 		FileSystem: dataMigrate,
 		Root:       "migrations",
 	}
 
-	n, err := migrateSql.Exec(paramDB, "postgres", migrations, migrateSql.Up)
+	n, err := migrate.Exec(paramDB, "postgres", migrations, migrate.Up)
 	if err != nil {
 		panic(err)
 	}

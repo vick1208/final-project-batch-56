@@ -1,4 +1,0 @@
-development:
-  dialect: postgres
-  datasource: dbname=db_boarding sslmode=disable
-  dir: database/migrations

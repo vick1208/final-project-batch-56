@@ -2,23 +2,25 @@ package repositories
 
 import (
 	"database/sql"
-	"project-indekost/model"
+	"fmt"
+	"project-indekost/structs"
 )
 
-func GetLodgers(db *sql.DB) (resultList []model.Lodger, err error) {
-	sqlQuery := "SELECT * FROM lodgers"
-	rows, err := db.Query(sqlQuery)
+func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
+	query := "SELECT id,first_name FROM lodger"
+	rows, err := db.Query(query)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	defer rows.Close()
+
 	for rows.Next() {
-		lodgers := model.Lodger{}
-		err = rows.Scan(&lodgers.ID, &lodgers.FirstName, &lodgers.LastName, &lodgers.City, &lodgers.Phone)
+		lodger := structs.Lodger{}
+		err = rows.Scan(&lodger.ID, &lodger.FirstName)
 		if err != nil {
 			panic(err)
 		}
-		resultList = append(resultList, lodgers)
+		result = append(result, lodger)
 	}
 	return
 }

@@ -9,7 +9,7 @@ import (
 func MainServer() *gin.Engine {
 
 	r := gin.Default()
-	owner := r.Group("/owner")
-	owner.GET("/lodgers", controllers.GetAllLodgers)
+
+	r.GET("/lodgers", controllers.GetAllLodgers)
 	return r
 }
