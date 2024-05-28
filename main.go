@@ -12,13 +12,14 @@ import (
 )
 
 var (
-	Database *sql.DB
-	err      error
+	DB  *sql.DB
+	err error
 )
 
 func main() {
 
 	err = godotenv.Load("config/.env.local")
+
 	if err != nil {
 		fmt.Println("failed to load file env: ", err)
 	}
@@ -27,19 +28,21 @@ func main() {
 	postgresInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 
-	Database, err = sql.Open("postgres", postgresInfo)
+	DB, err = sql.Open("postgres", postgresInfo)
 	if err != nil {
 		panic(err)
 	}
-	defer Database.Close()
-	err = Database.Ping()
+
+	defer DB.Close()
+
+	err = DB.Ping()
 	if err != nil {
 		fmt.Println("Failed connected to database")
 		panic(err)
 	}
 	fmt.Println("Successfully connected to database")
 
-	database.DatabaseMigrate(Database)
+	database.DatabaseMigrate(DB)
 	//local
 	PORT := ":8080"
 

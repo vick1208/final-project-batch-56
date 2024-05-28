@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"net/http"
+	"fmt"
 	"project-indekost/database"
 	"project-indekost/repositories"
 
@@ -9,15 +9,16 @@ import (
 )
 
 func GetAllLodgers(c *gin.Context) {
-	var result gin.H
+
 	lodgers, err := repositories.GetAllLodgers(database.DBConnection)
 	if err != nil {
-		result = gin.H{
-			"result": err,
-		}
+		fmt.Println(err)
 	}
-	result = gin.H{
-		"result": lodgers,
-	}
-	c.JSON(http.StatusOK, result)
+
+	fmt.Println(lodgers)
+
+}
+
+func InsertLodger(c *gin.Context) {
+
 }
