@@ -38,6 +38,6 @@ func InsertLodger(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"result": "Success Insert Category Data",
+		"result": "Success Insert Lodger Data",
 	})
 }

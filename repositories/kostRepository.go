@@ -26,7 +26,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 }
 
 func InsertLodger(db *sql.DB, lodger structs.Lodger) error {
-	query := "INSERT INTO category(first_name,city,phone) VALUES($1,$2,$3)"
+	query := "INSERT INTO lodger(first_name,city,phone) VALUES($1,$2,$3)"
 	errs := db.QueryRow(query, lodger.FirstName, lodger.City, lodger.Phone)
 	return errs.Err()
 }
