@@ -7,7 +7,7 @@ import (
 )
 
 func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
-	query := "SELECT id,first_name FROM lodger"
+	query := "SELECT id,first_name FROM lodgers"
 	rows, err := db.Query(query)
 	if err != nil {
 		fmt.Println(err)
