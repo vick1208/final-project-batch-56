@@ -42,8 +42,7 @@ func main() {
 	database.DatabaseMigrate(Database)
 	//local
 	PORT := ":8080"
-	//production
-	// PORT := ":" + os.Getenv("PORT")
+
 	server := routes.MainServer()
 	server.Run(PORT)
 }

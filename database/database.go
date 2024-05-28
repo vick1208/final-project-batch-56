@@ -13,13 +13,13 @@ var DBConnection *sql.DB
 //go:embed migrations/*.sql
 var dataMigrate embed.FS
 
-func DatabaseMigrate(paramDB *sql.DB) {
+func DatabaseMigrate(DBParam *sql.DB) {
 	migrations := &migrate.EmbedFileSystemMigrationSource{
 		FileSystem: dataMigrate,
 		Root:       "migrations",
 	}
 
-	n, err := migrate.Exec(paramDB, "postgres", migrations, migrate.Up)
+	n, err := migrate.Exec(DBParam, "postgres", migrations, migrate.Up)
 	if err != nil {
 		panic(err)
 	}
