@@ -6,7 +6,7 @@ import (
 
 func MainServer() *gin.Engine {
 
-	router := gin.Default()
+	r := gin.Default()
 
-	return router
+	return r
 }
