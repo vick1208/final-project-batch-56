@@ -8,8 +8,9 @@ import (
 
 func MainServer() *gin.Engine {
 
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET("/lodgers", controllers.GetAllLodgers)
-	return r
+	router.GET("/lodgers", controllers.GetAllLodgers)
+	router.POST("/lodgers", controllers.InsertLodger)
+	return router
 }

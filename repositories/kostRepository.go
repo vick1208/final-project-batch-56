@@ -6,21 +6,31 @@ import (
 )
 
 func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
-	sql := "SELECT id,first_name FROM lodger"
+	sql := "SELECT id,first_name,city,phone FROM lodger"
 	rows, err := db.Query(sql)
 	if err != nil {
 		panic(err)
 	}
+
 	defer rows.Close()
 	for rows.Next() {
 		lodger := structs.Lodger{}
-		rows.Scan(&lodger.ID, &lodger.Name)
+		err = rows.Scan(&lodger.ID, &lodger.FirstName)
+		if err != nil {
+			panic(err)
+		}
 		result = append(result, lodger)
 	}
 
 	return
 }
 
-func InsertLodger(db *sql.DB) {
+func InsertLodger(db *sql.DB, lodger structs.Lodger) error {
+	query := "INSERT INTO category(first_name,city,phone) VALUES($1,$2,$3)"
+	errs := db.QueryRow(query, lodger.FirstName, lodger.City, lodger.Phone)
+	return errs.Err()
+}
+
+func UpdateLodger(db *sql.DB) {
 
 }
