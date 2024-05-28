@@ -6,7 +6,7 @@ CREATE TABLE transactions(
     bank varchar(255) not null,
     payment_type varchar(255) not null,
     additional_fee int not null,
-    payment_type int not null
+    total_fee int not null
     
 );
 -- +migrate Down
