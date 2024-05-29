@@ -27,6 +27,6 @@ type Transaction struct {
 	Bank          string `json:"bank"`
 	PaymentDate   string `json:"payment_date"`
 	PaymentType   string `json:"payment_type"`
+	MainFee       int    `json:"main_fee"`
 	AdditionalFee int    `json:"additional_fee"`
-	TotalFee      int    `json:"total_fee"`
 }
