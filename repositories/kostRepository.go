@@ -75,3 +75,9 @@ func UpdateRoom(db *sql.DB, room structs.Room) error {
 	errs := db.QueryRow(query, room.RoomNumber, room.Price, room.RoomStatus, room.ID)
 	return errs.Err()
 }
+
+func DeleteRoom(db *sql.DB, room structs.Room) (err error) {
+	query := "DELETE FROM room WHERE id=$1"
+	errs := db.QueryRow(query, room.ID)
+	return errs.Err()
+}
