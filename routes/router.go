@@ -17,10 +17,10 @@ func MainServer() *gin.Engine {
 	router.DELETE("/lodgers/:id", controllers.DeleteLodger)
 
 	// route Kamar Kost
-
 	router.GET("/rooms", controllers.GetAllRooms)
 	router.POST("/rooms", controllers.InsertRoom)
 	router.PUT("/rooms/:id", controllers.UpdateRoom)
+	router.DELETE("/rooms/:id", controllers.DeleteRoom)
 
 	return router
 }

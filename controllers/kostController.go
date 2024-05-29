@@ -207,3 +207,30 @@ func UpdateRoom(c *gin.Context) {
 	})
 
 }
+
+func DeleteRoom(c *gin.Context) {
+	var room structs.Room
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"success": false,
+			"message": err.Error(),
+			"data":    utils.Empty,
+		})
+	}
+	room.ID = id
+	err = repositories.DeleteRoom(database.DBConnection, room)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"success": false,
+			"message": err.Error(),
+			"data":    utils.Empty,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"success": true,
+		"message": "Berhasil menghapus data lodger",
+		"data":    utils.Empty,
+	})
+}
