@@ -2,7 +2,7 @@ package structs
 
 type Lodger struct {
 	ID    int    `json:"id"`
-	Name  string `json:"name"`
+	Name  string `json:"name" binding:"required"`
 	City  string `json:"city"`
 	Phone string `json:"phone"`
 }
