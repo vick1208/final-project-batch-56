@@ -2,7 +2,8 @@
 -- +migrate StatementBegin
 CREATE TABLE rent_transaction(
     id SERIAL NOT NULL PRIMARY KEY,
-    rental_id INT REFERENCES rental(id),
+    lodger_id INT REFERENCES lodger(id),
+    room_id INT REFERENCES room(id),
     bank VARCHAR(255) NOT NULL,
     payment_date DATE NOT NULL DEFAULT CURRENT_DATE,
     due_date DATE NOT NULL DEFAULT CURRENT_DATE,
