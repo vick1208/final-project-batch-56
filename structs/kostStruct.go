@@ -23,7 +23,8 @@ type Reservation struct {
 
 type Transaction struct {
 	ID            int    `json:"id"`
-	RentalID      int    `json:"rental_id"`
+	LodgerID      int    `json:"lodger_id"`
+	RoomID        int    `json:"room_id"`
 	Bank          string `json:"bank"`
 	PaymentDate   string `json:"payment_date"`
 	DueDate       string `json:"due_date"`
