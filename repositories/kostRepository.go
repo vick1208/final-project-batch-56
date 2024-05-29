@@ -67,6 +67,6 @@ func GetAllRooms(db *sql.DB) ([]structs.Room, error) {
 
 func UpdateRoom(db *sql.DB, room structs.Room) error {
 	query := "UPDATE room SET room_number=$1,price=$2,room_status=$3 FROM id=$4"
-	errs := db.QueryRow(query, room.RoomNumber, room.Price, room.RoomStatus)
+	errs := db.QueryRow(query, room.RoomNumber, room.Price, room.RoomStatus, room.ID)
 	return errs.Err()
 }

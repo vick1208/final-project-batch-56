@@ -26,6 +26,7 @@ type Transaction struct {
 	ReservationID int    `json:"reservation_id"`
 	Bank          string `json:"bank"`
 	PaymentDate   string `json:"payment_date"`
+	DueDate       string `json:"due_date"`
 	PaymentType   string `json:"payment_type"`
 	MainFee       int    `json:"main_fee"`
 	AdditionalFee int    `json:"additional_fee"`
