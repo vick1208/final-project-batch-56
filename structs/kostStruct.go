@@ -3,15 +3,15 @@ package structs
 type Lodger struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name" binding:"required"`
-	City  string `json:"city"`
-	Phone string `json:"phone"`
+	City  string `json:"city" binding:"required"`
+	Phone string `json:"phone" binding:"required"`
 }
 
 type Room struct {
 	ID         int    `json:"id"`
-	RoomNumber string `json:"room_number"`
-	Price      int    `json:"price"`
-	RoomStatus string `json:"room_status"`
+	RoomNumber string `json:"room_number" binding:"required"`
+	Price      int    `json:"price" binding:"required"`
+	RoomStatus string `json:"room_status" binding:"required"`
 }
 
 type Reservation struct {
