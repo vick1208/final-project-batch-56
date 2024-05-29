@@ -5,6 +5,7 @@ import (
 	"project-indekost/database"
 	"project-indekost/repositories"
 	"project-indekost/structs"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -39,5 +40,46 @@ func InsertLodger(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{
 		"result": "Success Insert Lodger Data",
+	})
+}
+
+func UpdateLodger(c *gin.Context) {
+
+	var lodger structs.Lodger
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	err = c.ShouldBindJSON(&lodger)
+	if err != nil {
+		panic(err)
+	}
+
+	lodger.ID = id
+	err = repositories.UpdateLodger(database.DBConnection, lodger)
+	if err != nil {
+		panic(err)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": "Success Update Lodger Data",
+	})
+
+}
+
+func DeleteLodger(c *gin.Context) {
+	var lodger structs.Lodger
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	lodger.ID = id
+	err = repositories.DeleteLodger(database.DBConnection, lodger)
+	if err != nil {
+		panic(err)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"result": "Success Delete Lodger Data",
 	})
 }
