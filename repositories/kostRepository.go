@@ -6,7 +6,7 @@ import (
 )
 
 func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
-	sql := "SELECT id,first_name,city,phone FROM lodger"
+	sql := "SELECT id,name,city,phone FROM lodger"
 	rows, err := db.Query(sql)
 	if err != nil {
 		panic(err)
@@ -15,7 +15,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 	defer rows.Close()
 	for rows.Next() {
 		lodger := structs.Lodger{}
-		err = rows.Scan(&lodger.ID, &lodger.FirstName, &lodger.City, &lodger.Phone)
+		err = rows.Scan(&lodger.ID, &lodger.Name, &lodger.City, &lodger.Phone)
 		if err != nil {
 			panic(err)
 		}
@@ -26,7 +26,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 }
 
 func InsertLodger(db *sql.DB, lodger structs.Lodger) error {
-	query := "INSERT INTO lodger(first_name,city,phone) VALUES($1,$2,$3)"
-	errs := db.QueryRow(query, lodger.FirstName, lodger.City, lodger.Phone)
+	query := "INSERT INTO lodger(name,city,phone) VALUES($1,$2,$3)"
+	errs := db.QueryRow(query, lodger.Name, lodger.City, lodger.Phone)
 	return errs.Err()
 }
