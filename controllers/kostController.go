@@ -83,3 +83,60 @@ func DeleteLodger(c *gin.Context) {
 		"result": "Success Delete Lodger Data",
 	})
 }
+
+func GetAllRooms(c *gin.Context) {
+	var result gin.H
+	rooms, err := repositories.GetAllRooms(database.DBConnection)
+	if err != nil {
+		result = gin.H{
+			"result": err,
+		}
+	}
+	result = gin.H{
+		"result": rooms,
+	}
+	c.JSON(http.StatusOK, result)
+
+}
+
+func InsertRoom(c *gin.Context) {
+	var room structs.Room
+
+	err := c.ShouldBindJSON(&room)
+	if err != nil {
+		panic(err)
+	}
+
+	err = repositories.InsertRoom(database.DBConnection, room)
+	if err != nil {
+		panic(err)
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"result": "Success Insert Room Data",
+	})
+}
+
+func UpdateRoom(c *gin.Context) {
+
+	var room structs.Room
+
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		panic(err)
+	}
+	err = c.ShouldBindJSON(&room)
+	if err != nil {
+		panic(err)
+	}
+	room.ID = id
+	err = repositories.UpdateRoom(database.DBConnection, room)
+	if err != nil {
+		panic(err)
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"result": "Success Update Lodger Data",
+	})
+
+}

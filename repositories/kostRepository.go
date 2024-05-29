@@ -6,7 +6,7 @@ import (
 )
 
 func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
-	query := "SELECT id,name,city,phone FROM lodger"
+	query := "SELECT id,name,city,phone FROM lodger ORDER BY id"
 	rows, err := db.Query(query)
 	if err != nil {
 		panic(err)
@@ -48,7 +48,7 @@ func GetAllRooms(db *sql.DB) ([]structs.Room, error) {
 		err    error
 	)
 
-	query := "SELECT id,room_number,price,room_status FROM room"
+	query := "SELECT id,room_number,price,room_status FROM room ORDER BY id"
 	rows, err := db.Query(query)
 	if err != nil {
 		panic(err)
@@ -65,8 +65,13 @@ func GetAllRooms(db *sql.DB) ([]structs.Room, error) {
 
 }
 
+func InsertRoom(db *sql.DB, room structs.Room) error {
+	query := "INSERT INTO room (room_number,price,room_status) VALUES ($1,$2,$3)"
+	errs := db.QueryRow(query, room.RoomNumber, room.Price, room.RoomStatus)
+	return errs.Err()
+}
 func UpdateRoom(db *sql.DB, room structs.Room) error {
-	query := "UPDATE room SET room_number=$1,price=$2,room_status=$3 FROM id=$4"
+	query := "UPDATE room SET room_number=$1,price=$2,room_status=$3 WHERE id=$4"
 	errs := db.QueryRow(query, room.RoomNumber, room.Price, room.RoomStatus, room.ID)
 	return errs.Err()
 }
