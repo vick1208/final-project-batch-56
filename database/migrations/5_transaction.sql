@@ -7,7 +7,8 @@ CREATE TABLE transaction(
     payment_date DATE NOT NULL DEFAULT CURRENT_DATE,
     payment_type VARCHAR(255) NOT NULL,
     additional_fee INT NOT NULL,
-    total_fee INT NOT NULL
+    total_fee INT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT Now()
     
 )
 -- +migrate StatementEnd
