@@ -35,7 +35,7 @@ func InsertLodger(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&lodger)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -44,7 +44,7 @@ func InsertLodger(c *gin.Context) {
 
 	err = repositories.InsertLodger(database.DBConnection, lodger)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -64,7 +64,7 @@ func UpdateLodger(c *gin.Context) {
 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -72,7 +72,7 @@ func UpdateLodger(c *gin.Context) {
 	}
 	err = c.ShouldBindJSON(&lodger)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -82,7 +82,7 @@ func UpdateLodger(c *gin.Context) {
 	lodger.ID = id
 	err = repositories.UpdateLodger(database.DBConnection, lodger)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -101,7 +101,7 @@ func DeleteLodger(c *gin.Context) {
 	var lodger structs.Lodger
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -110,7 +110,7 @@ func DeleteLodger(c *gin.Context) {
 	lodger.ID = id
 	err = repositories.DeleteLodger(database.DBConnection, lodger)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -147,7 +147,7 @@ func InsertRoom(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&room)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -156,7 +156,7 @@ func InsertRoom(c *gin.Context) {
 
 	err = repositories.InsertRoom(database.DBConnection, room)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -176,7 +176,7 @@ func UpdateRoom(c *gin.Context) {
 
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -184,7 +184,7 @@ func UpdateRoom(c *gin.Context) {
 	}
 	err = c.ShouldBindJSON(&room)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
@@ -193,7 +193,7 @@ func UpdateRoom(c *gin.Context) {
 	room.ID = id
 	err = repositories.UpdateRoom(database.DBConnection, room)
 	if err != nil {
-		c.JSON(500, gin.H{
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
 			"message": err.Error(),
 			"data":    utils.Empty,
