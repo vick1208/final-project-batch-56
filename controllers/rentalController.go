@@ -78,7 +78,7 @@ func DeleteDataRental(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{
 			"success": true,
-			"message": "Berhasil menghapus data lodger",
+			"message": "Berhasil menghapus data rental",
 			"data":    utils.Empty,
 		})
 	}

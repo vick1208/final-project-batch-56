@@ -51,7 +51,7 @@ func InsertDataTransaction(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusCreated, gin.H{
 			"success": true,
-			"message": "Berhasil menambahkan data rental",
+			"message": "Berhasil menambahkan data transaction",
 			"data":    utils.Empty,
 		})
 	}
@@ -79,7 +79,7 @@ func DeleteDataTransaction(ctx *gin.Context) {
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{
 			"success": true,
-			"message": "Berhasil menghapus data lodger",
+			"message": "Berhasil menghapus data transaction",
 			"data":    utils.Empty,
 		})
 	}

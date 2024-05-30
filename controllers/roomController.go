@@ -120,7 +120,7 @@ func DeleteRoom(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"success": true,
-			"message": "Berhasil menghapus data lodger",
+			"message": "Berhasil menghapus data room",
 			"data":    utils.Empty,
 		})
 	}
