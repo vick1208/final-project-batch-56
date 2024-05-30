@@ -24,7 +24,7 @@ func GetLodgerDueDateTransaction(ctx *gin.Context) {
 	} else {
 		result = gin.H{
 			"success": true,
-			"message": "Berhasil mengambil seluruh data transaction dengan nama penghuni",
+			"message": "Berhasil mengambil seluruh data transaction dengan id penghuni kost",
 			"data":    transactions,
 		}
 		ctx.JSON(http.StatusOK, result)

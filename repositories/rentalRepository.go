@@ -37,8 +37,7 @@ func DeleteDataRental(db *sql.DB, rental structs.Rental) (err error) {
 }
 
 func GetDueDateTransaction(db *sql.DB) (result []structs.TransactionDueDate, err error) {
-	query := `SELECT rt.id,ld.name,due_date FROM rent_transaction rt 
-	INNER JOIN lodger ld ON rt.lodger_id = ld.id`
+	query := `SELECT id,lodger_id,due_date FROM rent_transaction`
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
@@ -57,7 +56,7 @@ func GetDueDateTransaction(db *sql.DB) (result []structs.TransactionDueDate, err
 }
 
 func InsertTransactionRentData(db *sql.DB, rentTrans structs.Transaction) (err error) {
-	querySql := `INSERT INTO
+	querySql := `INSERT INTO rent_transaction
 		(lodger_id, room_id, bank, payment_date, due_date, payment_type, main_fee, additional_fee, total_fee)
 		VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`
 	errs := db.QueryRow(querySql, rentTrans.LodgerID, rentTrans.RoomID, rentTrans.Bank, rentTrans.PaymentDate, rentTrans.DueDate, rentTrans.PaymentType, rentTrans.MainFee, rentTrans.AdditionalFee,
@@ -67,7 +66,7 @@ func InsertTransactionRentData(db *sql.DB, rentTrans structs.Transaction) (err e
 }
 
 func DeleteTransactionRentData(db *sql.DB, rentTrans structs.Transaction) (err error) {
-	query := "DELETE FROM rental WHERE id=$1"
+	query := "DELETE FROM rent_transaction WHERE id=$1"
 	errs := db.QueryRow(query, rentTrans.ID)
 	return errs.Err()
 }
