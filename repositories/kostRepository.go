@@ -9,7 +9,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 	query := "SELECT id,name,city,phone FROM lodger ORDER BY name"
 	rows, err := db.Query(query)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	defer rows.Close()
@@ -17,7 +17,7 @@ func GetAllLodgers(db *sql.DB) (result []structs.Lodger, err error) {
 		lodger := structs.Lodger{}
 		err = rows.Scan(&lodger.ID, &lodger.Name, &lodger.City, &lodger.Phone)
 		if err != nil {
-			return
+			return nil, err
 		}
 		result = append(result, lodger)
 	}
@@ -47,17 +47,20 @@ func GetAllRooms(db *sql.DB) (result []structs.Room, err error) {
 	query := "SELECT id,room_number,price,room_status FROM room ORDER BY id"
 	rows, err := db.Query(query)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	defer rows.Close()
 
 	for rows.Next() {
 		rooms := structs.Room{}
-		rows.Scan(&rooms.ID, &rooms.RoomNumber, &rooms.Price, &rooms.RoomStatus)
+		err = rows.Scan(&rooms.ID, &rooms.RoomNumber, &rooms.Price, &rooms.RoomStatus)
+		if err != nil {
+			return nil, err
+		}
 		result = append(result, rooms)
 	}
-	return result, err
+	return
 
 }
 

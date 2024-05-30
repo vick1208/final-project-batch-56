@@ -20,13 +20,15 @@ func GetAllLodgers(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		}
+		c.AbortWithStatusJSON(http.StatusInternalServerError, result)
+	} else {
+		result = gin.H{
+			"success": true,
+			"message": "Berhasil mengambil seluruh data lodger",
+			"data":    lodgers,
+		}
+		c.JSON(http.StatusOK, result)
 	}
-	result = gin.H{
-		"success": true,
-		"message": "Berhasil mengambil seluruh data lodger",
-		"data":    lodgers,
-	}
-	c.JSON(http.StatusOK, result)
 
 }
 
@@ -49,13 +51,16 @@ func InsertLodger(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+
+	} else {
+
+		c.JSON(http.StatusCreated, gin.H{
+			"success": true,
+			"message": "Berhasil menambahkan data lodger",
+			"data":    utils.Empty,
+		})
 	}
 
-	c.JSON(http.StatusCreated, gin.H{
-		"success": true,
-		"message": "Berhasil menambahkan data lodger",
-		"data":    utils.Empty,
-	})
 }
 
 func UpdateLodger(c *gin.Context) {
@@ -87,13 +92,13 @@ func UpdateLodger(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Berhasil memperbarui data lodger",
+			"data":    utils.Empty,
+		})
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "Berhasil memperbarui data lodger",
-		"data":    utils.Empty,
-	})
 
 }
 
@@ -115,12 +120,13 @@ func DeleteLodger(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Berhasil menghapus data lodger",
+			"data":    utils.Empty,
+		})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "Berhasil menghapus data lodger",
-		"data":    utils.Empty,
-	})
 }
 
 func GetAllRooms(c *gin.Context) {
@@ -132,11 +138,12 @@ func GetAllRooms(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		}
-	}
-	result = gin.H{
-		"success": true,
-		"message": "Berhasil mengambil seluruh data room",
-		"data":    rooms,
+	} else {
+		result = gin.H{
+			"success": true,
+			"message": "Berhasil mengambil seluruh data room",
+			"data":    rooms,
+		}
 	}
 	c.JSON(http.StatusOK, result)
 
@@ -161,13 +168,14 @@ func InsertRoom(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+	} else {
+		c.JSON(http.StatusCreated, gin.H{
+			"success": true,
+			"message": "Berhasil menambahkan data room",
+			"data":    utils.Empty,
+		})
 	}
 
-	c.JSON(http.StatusCreated, gin.H{
-		"success": true,
-		"message": "Berhasil menambahkan data room",
-		"data":    utils.Empty,
-	})
 }
 
 func UpdateRoom(c *gin.Context) {
@@ -198,13 +206,13 @@ func UpdateRoom(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Berhasil memperbarui data room",
+			"data":    utils.Empty,
+		})
 	}
-
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "Berhasil memperbarui data room",
-		"data":    utils.Empty,
-	})
 
 }
 
@@ -227,10 +235,11 @@ func DeleteRoom(c *gin.Context) {
 			"message": err.Error(),
 			"data":    utils.Empty,
 		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"success": true,
+			"message": "Berhasil menghapus data lodger",
+			"data":    utils.Empty,
+		})
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"success": true,
-		"message": "Berhasil menghapus data lodger",
-		"data":    utils.Empty,
-	})
 }
