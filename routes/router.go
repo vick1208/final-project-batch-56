@@ -12,15 +12,15 @@ func MainServer() *gin.Engine {
 
 	// route Penghuni Kost
 	router.GET("/lodgers", controllers.GetAllLodgers)
-	router.POST("/lodgers", controllers.InsertLodger)
-	router.PUT("/lodgers/:id", controllers.UpdateLodger)
-	router.DELETE("/lodgers/:id", controllers.DeleteLodger)
+	router.POST("/lodgers", controllers.BasicAuthMiddleware(), controllers.InsertLodger)
+	router.PUT("/lodgers/:id", controllers.BasicAuthMiddleware(), controllers.UpdateLodger)
+	router.DELETE("/lodgers/:id", controllers.BasicAuthMiddleware(), controllers.DeleteLodger)
 
 	// route Kamar Kost
 	router.GET("/rooms", controllers.GetAllRooms)
-	router.POST("/rooms", controllers.InsertRoom)
-	router.PUT("/rooms/:id", controllers.UpdateRoom)
-	router.DELETE("/rooms/:id", controllers.DeleteRoom)
+	router.POST("/rooms", controllers.BasicAuthMiddleware(), controllers.InsertRoom)
+	router.PUT("/rooms/:id", controllers.BasicAuthMiddleware(), controllers.UpdateRoom)
+	router.DELETE("/rooms/:id", controllers.BasicAuthMiddleware(), controllers.DeleteRoom)
 
 	return router
 }
