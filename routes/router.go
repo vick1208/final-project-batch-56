@@ -27,7 +27,7 @@ func MainServer() *gin.Engine {
 	router.POST("/rents", controllers.BasicAuthMiddleware(), controllers.InsertDataRental)
 	router.DELETE("/rents/:id", controllers.BasicAuthMiddleware(), controllers.DeleteDataRental)
 	// route data transaksi sewa
-	router.GET("/lodgers/duedate", controllers.GetLodgerDueDateTransaction)
+	router.GET("/transaction/duedate", controllers.GetLodgerDueDateTransaction)
 	router.POST("/transaction", controllers.BasicAuthMiddleware(), controllers.InsertDataTransaction)
 	router.DELETE("/transaction/:id", controllers.BasicAuthMiddleware(), controllers.DeleteDataTransaction)
 	return router
