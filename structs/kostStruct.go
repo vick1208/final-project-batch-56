@@ -14,7 +14,7 @@ type Room struct {
 	RoomStatus string `json:"room_status"`
 }
 
-type Reservation struct {
+type Rental struct {
 	ID        int    `json:"id"`
 	LodgerID  int    `json:"lodger_id"`
 	RoomID    int    `json:"room_id"`
@@ -31,4 +31,10 @@ type Transaction struct {
 	PaymentType   string `json:"payment_type"`
 	MainFee       int    `json:"main_fee"`
 	AdditionalFee int    `json:"additional_fee"`
+}
+
+type TransactionDueDate struct {
+	ID       int    `json:"id"`
+	LodgerID int    `json:"lodger_id"`
+	DueDate  string `json:"due_date"`
 }
