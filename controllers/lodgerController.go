@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
 	"project-indekost/database"
 	"project-indekost/repositories"
@@ -17,7 +18,7 @@ func GetAllLodgers(c *gin.Context) {
 	if err != nil {
 		result = gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal diambil").Error(),
 			"data":    utils.Empty,
 		}
 		c.AbortWithStatusJSON(http.StatusInternalServerError, result)
@@ -48,7 +49,7 @@ func InsertLodger(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal ditambahkan").Error(),
 			"data":    utils.Empty,
 		})
 
@@ -89,7 +90,7 @@ func UpdateLodger(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal diperbarui").Error(),
 			"data":    utils.Empty,
 		})
 	} else {
@@ -117,7 +118,7 @@ func DeleteLodger(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal dihapus").Error(),
 			"data":    utils.Empty,
 		})
 	} else {

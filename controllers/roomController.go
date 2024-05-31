@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
 	"project-indekost/database"
 	"project-indekost/repositories"
@@ -17,7 +18,7 @@ func GetAllRooms(c *gin.Context) {
 	if err != nil {
 		result = gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal diambil").Error(),
 			"data":    utils.Empty,
 		}
 	} else {
@@ -47,7 +48,7 @@ func InsertRoom(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal ditambahkan").Error(),
 			"data":    utils.Empty,
 		})
 	} else {
@@ -85,7 +86,7 @@ func UpdateRoom(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal diperbarui").Error(),
 			"data":    utils.Empty,
 		})
 	} else {
@@ -114,7 +115,7 @@ func DeleteRoom(c *gin.Context) {
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal dihapus").Error(),
 			"data":    utils.Empty,
 		})
 	} else {

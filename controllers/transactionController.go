@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"net/http"
 	"project-indekost/database"
 	"project-indekost/repositories"
@@ -17,7 +18,7 @@ func GetLodgerDueDateTransaction(ctx *gin.Context) {
 	if err != nil {
 		result = gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal diambil").Error(),
 			"data":    utils.Empty,
 		}
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, result)
@@ -45,7 +46,7 @@ func InsertDataTransaction(ctx *gin.Context) {
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal ditambahkan").Error(),
 			"data":    utils.Empty,
 		})
 	} else {
@@ -73,7 +74,7 @@ func DeleteDataTransaction(ctx *gin.Context) {
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"success": false,
-			"message": err.Error(),
+			"message": errors.New("data gagal dihapus").Error(),
 			"data":    utils.Empty,
 		})
 	} else {
